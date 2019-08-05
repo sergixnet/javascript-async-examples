@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Callbacks and promises in the same function</title>
+</head>
+
+<body>
+  <h1>Callbacks and promises in the same function</h1>
+
+  <script>
+    const error = true; // dont do this in production
+
+    function sleep(ms, cb) {
+      console.log('Sleeping...')
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (!error) {
+            cb ? cb(false, ms) : resolve(ms)
+          } else {
+            const errorInfo = { msg: 'Error!!', ms }
+            cb ? cb(errorInfo) : reject(errorInfo)
+          }
+        }, ms)
+      })
+    }
+
+    console.log('Step 1')
+
+    sleep(2000, (error, data) => {
+      if (error) return console.log(`Error from callback: ${error.msg} in ${error.ms} ms`)
+      console.log(`Data from callback: ${data} ms`)
+    })
+
+    sleep(1000)
+      .then(data => console.log(`Data from promise: ${data} ms`))
+      .catch(error => console.log(`Error from promise: ${error.msg} in ${error.ms} ms`));
+
+    (async function() {
+      try {
+        const data = await sleep(1500)
+        console.log('Data from Async:', data)
+      } catch(err) {
+        console.log('Error from Async:', err.msg)
+      }
+    })()
+  </script>
+</body>
+
+</html>
