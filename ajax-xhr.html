@@ -21,13 +21,13 @@
         if (request.readyState === 4) {
           if (request.status === 200) {
             const response = request.responseText
-            cb(null, JSON.parse(response))
+            cb(null, JSON.parse(response))  // with no error
             // console.log(response)
           } else {
             const error = {
               msg: 'We have an error'
             }
-            cb(error)
+            cb(error) // with error
           }
         }
       }
@@ -35,7 +35,7 @@
       request.send()
     }
 
-    function renderData(error, data) {
+    function renderData(error, data) { // Notice nodejs error first callback pattern cb(error, response)
       const artistsDiv = document.getElementById('artists')
       if (error) {
         artistsDiv.innerText = error.msg

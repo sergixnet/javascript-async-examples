@@ -7,7 +7,7 @@ This repo  is created to learn and play with the asynchrony in javascript. The c
 - [X] No asynchrony
 - [X] Callbacks with timers
 - [X] Ajax with XMLHttpRequest (XHR) and callbacks
-- [] Pattern: `error-first callback style` of Nodejs
+- [X] Pattern: `error-first callback style` of Nodejs
 - [] Promise `then`, `catch`, `finally`
 - [] `Promise.resolve`, `Promise.reject`
 - [] `Promise.race`, `Promise.all` with `fetch`
