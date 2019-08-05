@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ajax with XMLHttpRequest (XHR) and callbacks</title>
+</head>
+
+<body>
+  <h1>Ajax with XMLHttpRequest (XHR) and callbacks</h1>
+  <div id="artists">Loading...</div>
+
+  <script>
+    const url = 'https://gist.githubusercontent.com/planetoftheweb/98f35786733c8cccf81e/raw/f3dad774ed1fe20b36011b1261bb392ee759b867/data.json'
+
+    function ajaxRequest(url, cb) {
+      const request = new XMLHttpRequest()
+      request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+          if (request.status === 200) {
+            const response = request.responseText
+            cb(null, JSON.parse(response))
+            // console.log(response)
+          } else {
+            const error = {
+              msg: 'We have an error'
+            }
+            cb(error)
+          }
+        }
+      }
+      request.open('GET', url, true)
+      request.send()
+    }
+
+    function renderData(error, data) {
+      const artistsDiv = document.getElementById('artists')
+      if (error) {
+        artistsDiv.innerText = error.msg
+      } else {
+        renderArtistsList(data, artistsDiv)
+      }
+    }
+
+    function renderArtistsList(data, div) {
+      div.innerText = ''
+      const p = document.createElement('p')
+      const ol = document.createElement('ol')
+      p.innerText = `Total artists: ${data.length}`
+      div.appendChild(p)
+      div.appendChild(ol)
+      data.forEach((artist, i) => {
+        const li = document.createElement('li')
+        li.innerText = `${data[i].name} - ${data[i].reknown}`
+        ol.appendChild(li)
+      });
+    }
+
+    ajaxRequest(url, renderData)
+  </script>
+</body>
+
+</html>
