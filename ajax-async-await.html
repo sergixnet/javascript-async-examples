@@ -21,13 +21,20 @@
 
     (async function () {
       try {
+
+        console.time('Magic')
         const res = await fetch('http://airemad.com/api/v1/station')
         const stations = await res.json()
-        console.log(stations)
+        // console.log(stations)
+        const urls = stations.map(station => getWeather(station.id))
+        const data = await Promise.all(urls)
+        console.log("------DATA:", data)
+        console.timeEnd('Magic')
+
         stations.forEach(async station => {
           const details = await fetch(`http://airemad.com/api/v1/station/${station.id}`)
           const detailsInfo = await details.json()
-          console.log(`name: ${station.nombre_estacion}`)
+          // console.log(`name: ${station.nombre_estacion}`)
         });
       } catch (err) {
         console.log('Error!', err)

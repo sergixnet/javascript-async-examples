@@ -10,7 +10,7 @@ This repo is created to learn and play with the asynchrony in javascript. The co
 - [X] Pattern: `error-first callback style` of Nodejs
 - [X] Promise `then`, `catch`, `finally`
 - [X] `Promise.resolve`, `Promise.reject`
-- [] `Promise.race`, `Promise.all` with `fetch`
+- [X] `Promise.race`, `Promise.all` with `fetch`
 - [X] `Async/Await` with `try/catch/finally`
 - [] Callbacks y promises in the same function
 - [] `util.promisify` on Nodejs
