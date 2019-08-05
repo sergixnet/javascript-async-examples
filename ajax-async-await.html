@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ajax promises async await</title>
+</head>
+
+<body>
+  <h1>Ajax promises async await</h1>
+
+  <script>
+    function getWeather(id) {
+      return fetch(`http://airemad.com/api/v1/weather/${id}`)
+        .then(res => res.json())
+    }
+
+    console.log('Step 1');
+
+    (async function () {
+      try {
+        const res = await fetch('http://airemad.com/api/v1/station')
+        const stations = await res.json()
+        console.log(stations)
+        stations.forEach(async station => {
+          const details = await fetch(`http://airemad.com/api/v1/station/${station.id}`)
+          const detailsInfo = await details.json()
+          console.log(`name: ${station.nombre_estacion}`)
+        });
+      } catch (err) {
+        console.log('Error!', err)
+      } finally {
+        console.log('The end')
+      }
+    })()
+  </script>
+</body>
+
+</html>
