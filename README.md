@@ -14,4 +14,4 @@ This repo is created to learn and play with the asynchrony in javascript. The co
 - [X] `Async/Await` with `try/catch/finally`
 - [X] Callbacks y promises in the same function
 - [X] `util.promisify` on Nodejs
-- [] `EventEmitter` with the `PingPong Game`
+- [X] `EventEmitter` with the `PingPong Game`
