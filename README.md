@@ -4,7 +4,7 @@ This repo  is created to learn and play with the asynchrony in javascript. The c
 
 ## Topics
 
-- [] No asynchrony
+- [X] No asynchrony
 - [] Callbacks with timers
 - [] Ajax with XMLHttpRequest (XHR) and callbacks
 - [] Pattern: `error-first callback style` of Nodejs
